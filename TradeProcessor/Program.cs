@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 
 namespace TradeProcessor.ConsoleApp
@@ -7,7 +8,7 @@ namespace TradeProcessor.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var tradeStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("TradeProcessor.ConsoleApp.trades.txt");
+            var tradeStream = new FileStream("trades.txt",FileMode.Open);
 
             var tradeProcessor = new ConsoleApp.TradeProcessor();
             tradeProcessor.ProcessTrades(tradeStream);

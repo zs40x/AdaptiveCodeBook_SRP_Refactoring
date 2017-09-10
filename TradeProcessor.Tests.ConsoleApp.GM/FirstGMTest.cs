@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,19 +11,25 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
     {
         private const string ApplicationFile = "TradeProcessor.exe";
         private ApplicationUnderTest _applicationUnderTest;
+        private TestDataInputFile _testDataInputFile;
 
         [TestInitialize]
         public void Setup()
         {
             _applicationUnderTest = new ApplicationUnderTest(ApplicationFile);
+            _testDataInputFile = new TestDataInputFile("trades.txt");
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void EmptyInputFile()
         {
+            _testDataInputFile.WithContent("");
+
             _applicationUnderTest.Run();
 
-            Assert.AreEqual("", _applicationUnderTest.ConsoleOutput);
+            Assert.AreEqual(
+                "WARN: Line 1 malformed. Only 1 field(s) found.\r\nINFO: 0 trades processed\r\n",
+                _applicationUnderTest.ConsoleOutput);
         }
     }
 }
