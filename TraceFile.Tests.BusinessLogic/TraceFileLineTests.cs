@@ -26,5 +26,12 @@ namespace TraceFile.Tests.BusinessLogic
         {
             new TradeFileLine(1, "GPBUSD,xyz,1").AsTradeRecord();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidTraceFileLineException),"WARN: Trade price on line 1 not a valid decimal: mki")]
+        public void TradePriceNotAValidDecimal()
+        {
+            new TradeFileLine(1, "GPBUSD,100,mki").AsTradeRecord();
+        }
     }
 }

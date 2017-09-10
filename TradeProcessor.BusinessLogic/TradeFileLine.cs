@@ -36,6 +36,13 @@ namespace TradeProcessor.BusinessLogic
                     $"WARN: Trade amount on line {_lineNo} not a valid integer: '{columns[1]}'");
             }
 
+            decimal tradePrice;
+            if (!decimal.TryParse(columns[2], out tradePrice))
+            {
+                throw new InvalidTraceFileLineException(
+                    $"WARN: Trade price on line {_fileLine} not a valid decimal: '{columns[2]}'");
+            }
+
             return null;
         }
 
