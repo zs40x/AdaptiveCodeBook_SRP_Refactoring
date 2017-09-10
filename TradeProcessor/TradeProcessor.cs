@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 
 namespace TradeProcessor.ConsoleApp
 {
-    public class TradeProcessor
+    internal class TradeProcessor
     {
 
         private static float LotSize = 100000f;
 
         private readonly TradeFile _tradeFile;
+        private readonly TradeDatabase _tradeDatabase;
 
-        public TradeProcessor(TradeFile tradeFile)
+        public TradeProcessor(TradeFile tradeFile, TradeDatabase tradeDatabase)
         {
             _tradeFile = tradeFile;
+            _tradeDatabase = tradeDatabase;
         }
 
         public void ProcessTrades()
@@ -65,29 +66,7 @@ namespace TradeProcessor.ConsoleApp
                 lineCount++;
             }
 
-            using (var connection = new System.Data.SqlClient.SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;"))
-            {
-                connection.Open();
-                using (var transaction = connection.BeginTransaction())
-                {
-                    foreach (var trade in trades)
-                    {
-                        var command = connection.CreateCommand();
-                        command.Transaction = transaction;
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.CommandText = "dbo.insert_trade";
-                        command.Parameters.AddWithValue("@sourceCurrency", trade.SourceCurrency);
-                        command.Parameters.AddWithValue("@destinationCurrency", trade.DestinationCurrency);
-                        command.Parameters.AddWithValue("@lots", trade.Lots);
-                        command.Parameters.AddWithValue("@price", trade.Price);
-
-                        command.ExecuteNonQuery();
-                    }
-
-                    transaction.Commit();
-                }
-                connection.Close();
-            }
+            _tradeDatabase.InsertTradeRecords(trades);
 
             System.Console.WriteLine("INFO: {0} trades processed", trades.Count);
         }

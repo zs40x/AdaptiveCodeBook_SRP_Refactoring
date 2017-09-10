@@ -4,7 +4,7 @@ using System.IO;
 
 namespace TradeProcessor.ConsoleApp
 {
-    public class TradeFile: IDisposable
+    internal class TradeFile: IDisposable
     {
         private readonly FileStream _tradeFileStream;
 
