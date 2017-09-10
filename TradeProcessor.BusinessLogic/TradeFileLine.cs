@@ -1,9 +1,11 @@
-﻿namespace TradeProcessor.BusinessLogic
+﻿using System.Collections.Generic;
+
+namespace TradeProcessor.BusinessLogic
 {
     public class TradeFileLine
     {
-        private int _lineNo;
-        private string _fileLine;
+        private readonly int _lineNo;
+        private readonly string _fileLine;
 
         public TradeFileLine(int lineNo, string fileLine)
         {
@@ -13,13 +15,30 @@
 
         public TradeRecord AsTradeRecord()
         {
-            if (string.IsNullOrEmpty(_fileLine))
+            var columns = LineColumns();
+
+            if (columns.Count < 3)
             {
                 throw new InvalidTraceFileLineException(
-                        string.Format("WARN: Line {0} malformed. Only {1} field(s) found.", _lineNo, 1)
-                    );
+                    $"WARN: Line {_lineNo} malformed. Only {1} field(s) found.");
             }
+
+            if (columns[0].Length != 6)
+            {
+                throw new InvalidTraceFileLineException(
+                    $"WARN: Trade currencies on line {_lineNo} malformed: '{columns[0]}'");
+            }
+
+
+
             return null;
+        }
+
+        private List<string> LineColumns()
+        {
+            return string.IsNullOrEmpty(_fileLine) 
+                ? new List<string>() 
+                : new List<string>(_fileLine.Split(',')) ;
         }
     }
 }

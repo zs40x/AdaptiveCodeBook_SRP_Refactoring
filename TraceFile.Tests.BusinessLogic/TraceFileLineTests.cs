@@ -12,5 +12,12 @@ namespace TraceFile.Tests.BusinessLogic
         {
             new TradeFileLine(1, "").AsTradeRecord();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidTraceFileLineException),"WARN: Trade currencies on line 1 malformed: 'abc'")]
+        public void InvaildTradeCurrency()
+        {
+            new TradeFileLine(1, "abc,100,1").AsTradeRecord();
+        }
     }
 }
