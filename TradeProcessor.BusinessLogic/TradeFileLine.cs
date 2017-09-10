@@ -43,7 +43,13 @@ namespace TradeProcessor.BusinessLogic
                     $"WARN: Trade price on line {_fileLine} not a valid decimal: '{columns[2]}'");
             }
 
-            return null;
+            return new TradeRecord
+            {
+                DestinationCurrency = columns[0].Substring(3,3),
+                Lots = tradeAmount,
+                Price = tradePrice,
+                SourceCurrency = columns[0].Substring(0,3)
+            };
         }
 
         private List<string> LineColumns()
