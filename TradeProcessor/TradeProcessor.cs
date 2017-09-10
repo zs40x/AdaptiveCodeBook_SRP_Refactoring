@@ -66,7 +66,7 @@ namespace TradeProcessor.ConsoleApp
                 lineCount++;
             }
 
-            using (var connection = new System.Data.SqlClient.SqlConnection("Data Source=(local);Initial Catalog=TradeDatabase;Integrated Security=True;"))
+            using (var connection = new System.Data.SqlClient.SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;"))
             {
                 connection.Open();
                 using (var transaction = connection.BeginTransaction())
