@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TradeProcessor.BusinessLogic;
 
 namespace TradeProcessor.ConsoleApp
 {

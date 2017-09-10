@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CF8DF92B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeProcessor.Tests.ConsoleApp.GM", "TradeProcessor.Tests.ConsoleApp.GM\TradeProcessor.Tests.ConsoleApp.GM.csproj", "{B95799B4-7C8E-4BE0-8C2C-5C1A057AAC6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeProcessor.BusinessLogic", "TradeProcessor.BusinessLogic\TradeProcessor.BusinessLogic.csproj", "{FD7E6F04-7C4E-4139-BBF3-E0E6FBE52B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceFile.Tests.BusinessLogic", "TraceFile.Tests.BusinessLogic\TraceFile.Tests.BusinessLogic.csproj", "{C635E437-9AB8-43E5-A333-4034612DB059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,11 +35,20 @@ Global
 		{B95799B4-7C8E-4BE0-8C2C-5C1A057AAC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B95799B4-7C8E-4BE0-8C2C-5C1A057AAC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B95799B4-7C8E-4BE0-8C2C-5C1A057AAC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD7E6F04-7C4E-4139-BBF3-E0E6FBE52B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD7E6F04-7C4E-4139-BBF3-E0E6FBE52B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD7E6F04-7C4E-4139-BBF3-E0E6FBE52B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD7E6F04-7C4E-4139-BBF3-E0E6FBE52B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C635E437-9AB8-43E5-A333-4034612DB059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C635E437-9AB8-43E5-A333-4034612DB059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C635E437-9AB8-43E5-A333-4034612DB059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C635E437-9AB8-43E5-A333-4034612DB059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B95799B4-7C8E-4BE0-8C2C-5C1A057AAC6A} = {CF8DF92B-A297-41D8-9F39-AEA12B45EA9E}
+		{C635E437-9AB8-43E5-A333-4034612DB059} = {CF8DF92B-A297-41D8-9F39-AEA12B45EA9E}
 	EndGlobalSection
 EndGlobal

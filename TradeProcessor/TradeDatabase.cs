@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using TradeProcessor.BusinessLogic;
 
 namespace TradeProcessor.ConsoleApp
 {
