@@ -10,8 +10,8 @@ namespace TradeProcessor.ConsoleApp
         {
             var tradeStream = new FileStream("trades.txt",FileMode.Open);
 
-            var tradeProcessor = new ConsoleApp.TradeProcessor();
-            tradeProcessor.ProcessTrades(tradeStream);
+            var tradeProcessor = new ConsoleApp.TradeProcessor(new TradeFile(tradeStream));
+            tradeProcessor.ProcessTrades();
 
             Console.ReadKey();
         }

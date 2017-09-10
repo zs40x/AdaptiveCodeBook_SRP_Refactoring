@@ -5,23 +5,22 @@ namespace TradeProcessor.ConsoleApp
 {
     public class TradeProcessor
     {
-        public void ProcessTrades(Stream stream)
-        {
-            // read rows
-            var lines = new List<string>();
-            using (var reader = new StreamReader(stream))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    lines.Add(line);
-                }
-            }
 
+        private static float LotSize = 100000f;
+
+        private readonly TradeFile _tradeFile;
+
+        public TradeProcessor(TradeFile tradeFile)
+        {
+            _tradeFile = tradeFile;
+        }
+
+        public void ProcessTrades()
+        {
             var trades = new List<TradeRecord>();
 
             var lineCount = 1;
-            foreach (var line in lines)
+            foreach (var line in _tradeFile.TradeLines())
             {
                 var fields = line.Split(new char[] { ',' });
 
@@ -93,6 +92,7 @@ namespace TradeProcessor.ConsoleApp
             System.Console.WriteLine("INFO: {0} trades processed", trades.Count);
         }
 
-        private static float LotSize = 100000f;
+
+        
     }
 }
