@@ -1,13 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Security.Cryptography;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TradeProcessor.Tests.ConsoleApp.GM
 {
     [TestClass]
-    public class FirstGMTest
+    public class ChracterizationTests
     {
         private const string ApplicationFile = "TradeProcessor.exe";
         private ApplicationUnderTest _applicationUnderTest;

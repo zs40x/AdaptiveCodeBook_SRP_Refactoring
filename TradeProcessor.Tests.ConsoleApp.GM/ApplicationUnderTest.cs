@@ -1,6 +1,6 @@
 ﻿namespace TradeProcessor.Tests.ConsoleApp.GM
 {
-    class ApplicationUnderTest
+    internal class ApplicationUnderTest
     {
         private readonly string _applicationExe;
 
