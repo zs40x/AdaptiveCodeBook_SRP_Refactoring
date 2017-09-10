@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TradeProcessor.BusinessLogic;
 
 namespace TradeProcessor.ConsoleApp
 {
     internal class TradeProcessor
     {
-
         private readonly TradeFile _tradeFile;
         private readonly TradeDatabase _tradeDatabase;
 
@@ -16,16 +18,23 @@ namespace TradeProcessor.ConsoleApp
 
         public void ProcessTrades()
         {
-            var tradeLines = _tradeFile.TradeLines();
+            var tradeRecords = new List<TradeRecord>();
 
-            var tradeRecords = 
-                tradeLines
-                .Select(tradeLine => tradeLine.AsTradeRecord())
-                .ToList();
+            foreach (var tradeLine in _tradeFile.TradeLines())
+            {
+                try
+                {
+                    tradeRecords.Add(tradeLine.AsTradeRecord());
+                }
+                catch (InvalidTraceFileLineException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }
 
             _tradeDatabase.InsertTradeRecords(tradeRecords);
 
-            System.Console.WriteLine("INFO: {0} trades processed", tradeRecords.Count);
+            Console.WriteLine("INFO: {0} trades processed", tradeRecords.Count);
         }
     }
 }
