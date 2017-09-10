@@ -42,7 +42,7 @@ namespace TraceFile.Tests.BusinessLogic
             Assert.IsNotNull(tradeRecord);
             Assert.AreEqual("GPB", tradeRecord.SourceCurrency);
             Assert.AreEqual("USD",tradeRecord.DestinationCurrency);
-            Assert.AreEqual(100f, tradeRecord.Lots);
+            Assert.AreEqual(0.001f, tradeRecord.Lots);
             Assert.AreEqual(0.2m,tradeRecord.Price);
         }
     }

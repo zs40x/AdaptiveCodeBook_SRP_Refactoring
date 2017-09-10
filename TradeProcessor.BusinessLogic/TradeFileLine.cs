@@ -4,6 +4,8 @@ namespace TradeProcessor.BusinessLogic
 {
     public class TradeFileLine
     {
+        private static float LotSize = 100000f;
+
         private readonly int _lineNo;
         private readonly string _fileLine;
 
@@ -46,7 +48,7 @@ namespace TradeProcessor.BusinessLogic
             return new TradeRecord
             {
                 DestinationCurrency = columns[0].Substring(3,3),
-                Lots = tradeAmount,
+                Lots = tradeAmount / LotSize,
                 Price = tradePrice,
                 SourceCurrency = columns[0].Substring(0,3)
             };

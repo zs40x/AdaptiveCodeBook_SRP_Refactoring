@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using TradeProcessor.BusinessLogic;
 
 namespace TradeProcessor.ConsoleApp
 {
@@ -13,16 +14,18 @@ namespace TradeProcessor.ConsoleApp
             _tradeFileStream = tradeFileStream;
         }
 
-        public IEnumerable<string> TradeLines()
+        public IEnumerable<TradeFileLine> TradeLines()
         {
-            var lines = new List<string>();
+            var lines = new List<TradeFileLine>();
+            var lineNo = 1;
 
             using (var reader = new StreamReader(_tradeFileStream))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    lines.Add(line);
+                    lines.Add(new TradeFileLine(lineNo, line));
+                    lineNo++;
                 }
             }
 
