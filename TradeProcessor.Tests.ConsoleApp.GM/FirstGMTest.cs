@@ -33,7 +33,7 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         }
 
         [TestMethod]
-        public void FileWithIncompleteLine()
+        public void OneFieldOnly()
         {
             _testDataInputFile.WithContent("Test");
 
@@ -41,6 +41,18 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
 
             Assert.AreEqual(
                 "WARN: Line 1 malformed. Only 1 field(s) found.\r\nINFO: 0 trades processed\r\n",
+                _applicationUnderTest.ConsoleOutput);
+        }
+
+        [TestMethod]
+        public void MalformedCurrencyPair()
+        {
+            _testDataInputFile.WithContent("Test,123,abc");
+      
+            _applicationUnderTest.Run();
+
+            Assert.AreEqual(
+                "WARN: Trade currencies on line 1 malformed: \'Test\'\r\nINFO: 0 trades processed\r\n",
                 _applicationUnderTest.ConsoleOutput);
         }
     }
