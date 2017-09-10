@@ -23,7 +23,19 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         [TestMethod]
         public void EmptyInputFile()
         {
-            _testDataInputFile.WithContent("");
+            _testDataInputFile.WithContent(string.Empty);
+
+            _applicationUnderTest.Run();
+
+            Assert.AreEqual(
+                "INFO: 0 trades processed\r\n",
+                _applicationUnderTest.ConsoleOutput);
+        }
+
+        [TestMethod]
+        public void FileWithIncompleteLine()
+        {
+            _testDataInputFile.WithContent("Test");
 
             _applicationUnderTest.Run();
 

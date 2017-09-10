@@ -19,12 +19,15 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         public void WithContent(string content)
         {
             File.Delete(_filePath);
-
+            
             using (var stream = new FileStream(_filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
                 using (var writer = new StreamWriter(stream))
                 {
-                    writer.WriteLine(content);
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        writer.WriteLine(content);
+                    }
                 }
             }
         }
