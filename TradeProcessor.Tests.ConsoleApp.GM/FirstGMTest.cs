@@ -55,5 +55,41 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
                 "WARN: Trade currencies on line 1 malformed: \'Test\'\r\nINFO: 0 trades processed\r\n",
                 _applicationUnderTest.ConsoleOutput);
         }
+
+        [TestMethod]
+        public void TradeVolumeInvalid()
+        {
+            _testDataInputFile.WithContent("GBPUSD,xyz,abc");
+
+            _applicationUnderTest.Run();
+
+            Assert.AreEqual(
+                "WARN: Trade amount on line 1 not a valid integer: \'xyz\'\r\nWARN: Trade price on line 1 not a valid decimal: \'abc\'\r\nINFO: 1 trades processed\r\n",
+                _applicationUnderTest.ConsoleOutput);
+        }
+
+        [TestMethod]
+        public void TradeAmountInvalid()
+        {
+            _testDataInputFile.WithContent("GBPUSD,100,abc");
+
+            _applicationUnderTest.Run();
+
+            Assert.AreEqual(
+                "WARN: Trade price on line 1 not a valid decimal: \'abc\'\r\nINFO: 1 trades processed\r\n",
+                _applicationUnderTest.ConsoleOutput);
+        }
+
+        [TestMethod]
+        public void CorrectFormat()
+        {
+            _testDataInputFile.WithContent("GBPUSD,100,0.81");
+
+            _applicationUnderTest.Run();
+
+            Assert.AreEqual(
+                "INFO: 1 trades processed\r\n", 
+                _applicationUnderTest.ConsoleOutput);
+        }
     }
 }
