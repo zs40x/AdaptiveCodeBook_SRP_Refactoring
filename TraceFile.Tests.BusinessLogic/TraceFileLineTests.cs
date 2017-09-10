@@ -19,5 +19,12 @@ namespace TraceFile.Tests.BusinessLogic
         {
             new TradeFileLine(1, "abc,100,1").AsTradeRecord();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidTraceFileLineException), "WARN: Trade amount on line 1 not a valid integer: xyz")]
+        public void TradeAmountNotAValidInteger()
+        {
+            new TradeFileLine(1, "GPBUSD,xyz,1").AsTradeRecord();
+        }
     }
 }

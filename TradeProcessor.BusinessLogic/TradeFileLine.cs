@@ -29,7 +29,12 @@ namespace TradeProcessor.BusinessLogic
                     $"WARN: Trade currencies on line {_lineNo} malformed: '{columns[0]}'");
             }
 
-
+            int tradeAmount;
+            if (!int.TryParse(columns[1], out tradeAmount))
+            {
+                throw new InvalidTraceFileLineException(
+                    $"WARN: Trade amount on line {_lineNo} not a valid integer: '{columns[1]}'");
+            }
 
             return null;
         }
