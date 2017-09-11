@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TradeProcessor.BusinessLogic;
 
 namespace TraceFile.Tests.BusinessLogic
@@ -7,32 +8,38 @@ namespace TraceFile.Tests.BusinessLogic
     public class TraceFileLineTests
     {
         [TestMethod]
-        [ExpectedException(typeof(InvalidTraceFileLineException), "WARN: Line 1 malformed. Only 1 field(s) found.")]
         public void InitialLine()
         {
-            new TradeFileLine(1, "").AsTradeRecord();
+            var validationResult = MakeTestInstance("test").Validate();
+            Assert.IsFalse(validationResult.Processed,"Should not be marked as processed");
+            Assert.AreEqual("WARN: Line 1 malformed. Only 1 field(s) found.",validationResult.LogMessages.First());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidTraceFileLineException),"WARN: Trade currencies on line 1 malformed: 'abc'")]
         public void InvaildTradeCurrency()
         {
-            new TradeFileLine(1, "abc,100,1").AsTradeRecord();
+            var validationResult = MakeTestInstance("abc,100,1").Validate();
+            Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
+            Assert.AreEqual("WARN: Trade currencies on line 1 malformed: 'abc'", validationResult.LogMessages.First());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidTraceFileLineException), "WARN: Trade amount on line 1 not a valid integer: xyz")]
         public void TradeAmountNotAValidInteger()
         {
-            new TradeFileLine(1, "GPBUSD,xyz,1").AsTradeRecord();
+            var validationResult = MakeTestInstance("GPBUSD,xyz,1").Validate();
+            Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
+            Assert.AreEqual("WARN: Trade amount on line 1 not a valid integer: 'xyz'", validationResult.LogMessages.First());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidTraceFileLineException),"WARN: Trade price on line 1 not a valid decimal: mki")]
         public void TradePriceNotAValidDecimal()
         {
-            new TradeFileLine(1, "GPBUSD,100,mki").AsTradeRecord();
+            var validationResult = MakeTestInstance("GPBUSD,100,mki").Validate();
+            Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
+            Assert.AreEqual("WARN: Trade price on line 1 not a valid decimal: 'mki'", validationResult.LogMessages.First());
         }
+
+        // ToDo: Test amount and price invalid -> 2 log messages
 
         [TestMethod]
         public void ReturnsTradeRecord()
@@ -44,6 +51,11 @@ namespace TraceFile.Tests.BusinessLogic
             Assert.AreEqual("USD",tradeRecord.DestinationCurrency);
             Assert.AreEqual(0.001f, tradeRecord.Lots);
             Assert.AreEqual(0.2m,tradeRecord.Price);
+        }
+
+        private static TradeFileLine MakeTestInstance(string tradeLine)
+        {
+            return new TradeFileLine(1, tradeLine);
         }
     }
 }

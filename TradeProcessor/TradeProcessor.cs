@@ -18,9 +18,10 @@ namespace TradeProcessor.ConsoleApp
 
         public void ProcessTrades()
         {
+            var tradeLines = _tradeFile.TradeLines() as IList<TradeFileLine> ?? new List<TradeFileLine>();
             var tradeRecords = new List<TradeRecord>();
 
-            foreach (var tradeLine in _tradeFile.TradeLines())
+            foreach (var tradeLine in tradeLines)
             {
                 try
                 {
@@ -34,7 +35,7 @@ namespace TradeProcessor.ConsoleApp
 
             _tradeDatabase.InsertTradeRecords(tradeRecords);
 
-            Console.WriteLine("INFO: {0} trades processed", tradeRecords.Count);
+            Console.WriteLine("INFO: {0} trades processed", tradeLines.Count());
         }
     }
 }

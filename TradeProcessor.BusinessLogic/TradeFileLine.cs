@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TradeProcessor.BusinessLogic
 {
@@ -15,41 +16,43 @@ namespace TradeProcessor.BusinessLogic
             _lineNo = lineNo;
         }
 
-        public TradeRecord AsTradeRecord()
+        public TradeLineValidationResult Validate()
         {
+            var logMessages = new List<string>();
             var columns = LineColumns();
 
             if (columns.Count < 3)
             {
-                throw new InvalidTraceFileLineException(
-                    $"WARN: Line {_lineNo} malformed. Only {1} field(s) found.");
+                return new TradeLineValidationResult(false, new List<string> { $"WARN: Line {_lineNo} malformed. Only {1} field(s) found." });
             }
 
             if (columns[0].Length != 6)
             {
-                throw new InvalidTraceFileLineException(
-                    $"WARN: Trade currencies on line {_lineNo} malformed: '{columns[0]}'");
+                logMessages.Add($"WARN: Trade currencies on line {_lineNo} malformed: '{columns[0]}'");
             }
 
-            int tradeAmount;
-            if (!int.TryParse(columns[1], out tradeAmount))
+            if (!int.TryParse(columns[1], out _))
             {
-                throw new InvalidTraceFileLineException(
-                    $"WARN: Trade amount on line {_lineNo} not a valid integer: '{columns[1]}'");
+                logMessages.Add($"WARN: Trade amount on line {_lineNo} not a valid integer: '{columns[1]}'");
             }
 
-            decimal tradePrice;
-            if (!decimal.TryParse(columns[2], out tradePrice))
+            if (!decimal.TryParse(columns[2], out _))
             {
-                throw new InvalidTraceFileLineException(
-                    $"WARN: Trade price on line {_fileLine} not a valid decimal: '{columns[2]}'");
+                logMessages.Add($"WARN: Trade price on line {_lineNo} not a valid decimal: '{columns[2]}'");
             }
+
+            return new TradeLineValidationResult(true, logMessages);
+        }
+
+        public TradeRecord AsTradeRecord()
+        {
+            var columns = LineColumns();
 
             return new TradeRecord
             {
                 DestinationCurrency = columns[0].Substring(3,3),
-                Lots = tradeAmount / LotSize,
-                Price = tradePrice,
+                Lots = int.Parse(columns[1]) / LotSize,
+                Price = decimal.Parse(columns[2]),
                 SourceCurrency = columns[0].Substring(0,3)
             };
         }
