@@ -12,9 +12,10 @@ namespace TradeProcessor.ConsoleApp
             var tradeStream = new FileStream("trades.txt",FileMode.Open);
 
             var tradeProcessor = 
-                new ConsoleApp.TradeProcessor(
+                new TradeProcessor(
                     new TradeFile(tradeStream),
                     new TradeDatabase(new SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;")));
+
             tradeProcessor.ProcessTrades();
 
             Console.ReadKey();

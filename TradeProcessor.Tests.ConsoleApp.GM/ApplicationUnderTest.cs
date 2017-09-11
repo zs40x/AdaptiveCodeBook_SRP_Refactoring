@@ -26,7 +26,7 @@
 
             process.Start();
             process.StandardInput.WriteLine(@" ");
-
+            
             ConsoleOutput = process.StandardOutput.ReadToEnd();
 
             process.WaitForExit();

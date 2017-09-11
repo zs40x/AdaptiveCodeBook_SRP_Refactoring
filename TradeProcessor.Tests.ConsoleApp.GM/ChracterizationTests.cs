@@ -55,7 +55,7 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         [TestMethod]
         public void TradeVolumeInvalid()
         {
-            _testDataInputFile.WithContent("GBPUSD,xyz,abc");
+            _testDataInputFile.WithContent("GBPUSD,xyz,0.1");
 
             _applicationUnderTest.Run();
 

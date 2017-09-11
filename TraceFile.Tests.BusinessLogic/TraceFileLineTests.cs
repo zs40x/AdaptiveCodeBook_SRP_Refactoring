@@ -39,7 +39,14 @@ namespace TraceFile.Tests.BusinessLogic
             Assert.AreEqual("WARN: Trade price on line 1 not a valid decimal: 'mki'", validationResult.LogMessages.First());
         }
 
-        // ToDo: Test amount and price invalid -> 2 log messages
+        [TestMethod]
+        public void TradeAmoundAndPriceInvalid()
+        {
+            var validationResult = MakeTestInstance("GBPUSD,afd,zds").Validate();
+            Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
+            Assert.IsTrue(validationResult.LogMessages.Contains("WARN: Trade amount on line 1 not a valid integer: 'afd'"));
+            Assert.IsTrue(validationResult.LogMessages.Contains("WARN: Trade price on line 1 not a valid decimal: 'zds'"));
+        }
 
         [TestMethod]
         public void ReturnsTradeRecord()

@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InvalidTraceFileLineException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TradeFileLine.cs" />
     <Compile Include="TradeLineValidationResult.cs" />
