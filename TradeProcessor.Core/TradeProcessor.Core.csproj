@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD7E6F04-7C4E-4139-BBF3-E0E6FBE52B26}</ProjectGuid>
+    <ProjectGuid>{C96F1ACB-A4FF-471D-93AF-9BE115286271}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TradeProcessor.BusinessLogic</RootNamespace>
-    <AssemblyName>TradeProcessor.BusinessLogic</AssemblyName>
+    <RootNamespace>TradeProcessor.Core</RootNamespace>
+    <AssemblyName>TradeProcessor.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,15 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ITradeStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TradeFileLine.cs" />
-    <Compile Include="TradeLineValidationResult.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TradeProcessor.Core\TradeProcessor.Core.csproj">
-      <Project>{c96f1acb-a4ff-471d-93af-9be115286271}</Project>
-      <Name>TradeProcessor.Core</Name>
-    </ProjectReference>
+    <Compile Include="Domain\TradeRecord.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -62,6 +62,10 @@
       <Project>{fd7e6f04-7c4e-4139-bbf3-e0e6fbe52b26}</Project>
       <Name>TradeProcessor.BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TradeProcessor.Core\TradeProcessor.Core.csproj">
+      <Project>{c96f1acb-a4ff-471d-93af-9be115286271}</Project>
+      <Name>TradeProcessor.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

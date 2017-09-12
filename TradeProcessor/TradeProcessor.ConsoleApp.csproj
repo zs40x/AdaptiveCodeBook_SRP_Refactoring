@@ -60,7 +60,6 @@
     <Compile Include="ConsoleLog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TradeDatabase.cs" />
     <Compile Include="TradeFile.cs" />
     <Compile Include="TradeProcessor.cs" />
   </ItemGroup>
@@ -76,6 +75,14 @@
     <ProjectReference Include="..\TradeProcessor.BusinessLogic\TradeProcessor.BusinessLogic.csproj">
       <Project>{fd7e6f04-7c4e-4139-bbf3-e0e6fbe52b26}</Project>
       <Name>TradeProcessor.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TradeProcessor.Core\TradeProcessor.Core.csproj">
+      <Project>{c96f1acb-a4ff-471d-93af-9be115286271}</Project>
+      <Name>TradeProcessor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TradeProcessor.Infrasturcure\TradeProcessor.Infrasturcure.csproj">
+      <Project>{dd282a07-9491-4228-8f13-45d6f44d0f3b}</Project>
+      <Name>TradeProcessor.Infrasturcure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

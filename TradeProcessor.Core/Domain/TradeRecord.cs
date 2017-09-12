@@ -1,4 +1,4 @@
-﻿namespace TradeProcessor.BusinessLogic
+﻿namespace TradeProcessor.Core.Domain
 {
     public class TradeRecord
     {

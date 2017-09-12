@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TradeProcessor.BusinessLogic;
+using TradeProcessor.Core.Domain;
+using TradeProcessor.Core.Interfaces;
 
-namespace TradeProcessor.ConsoleApp
+namespace TradeProcessor.Infrasturcure
 {
-    internal class TradeDatabase: IDisposable
+    public class SqlServerTradeStore: IDisposable, ITradeStore
     {
         private readonly SqlConnection _sqlConnection;
 
-        public TradeDatabase(SqlConnection sqlConnection)
+        public SqlServerTradeStore(SqlConnection sqlConnection)
         {
             _sqlConnection = sqlConnection;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.IO;
+using TradeProcessor.Infrasturcure;
 
 namespace TradeProcessor.ConsoleApp
 {
@@ -13,7 +14,7 @@ namespace TradeProcessor.ConsoleApp
             var tradeProcessor = 
                 new TradeProcessor(
                     new TradeFile(tradeStream),
-                    new TradeDatabase(new SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;")),
+                    new SqlServerTradeStore(new SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;")),
                     new ConsoleLog());
 
             tradeProcessor.ProcessTrades();
