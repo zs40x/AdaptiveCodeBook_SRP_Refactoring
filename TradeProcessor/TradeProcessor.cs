@@ -8,11 +8,13 @@ namespace TradeProcessor.ConsoleApp
     {
         private readonly TradeFile _tradeFile;
         private readonly TradeDatabase _tradeDatabase;
+        private readonly ILog _log;
 
-        public TradeProcessor(TradeFile tradeFile, TradeDatabase tradeDatabase)
+        public TradeProcessor(TradeFile tradeFile, TradeDatabase tradeDatabase, ILog log)
         {
             _tradeFile = tradeFile;
             _tradeDatabase = tradeDatabase;
+            _log = log;
         }
 
         public void ProcessTrades()
@@ -25,7 +27,7 @@ namespace TradeProcessor.ConsoleApp
             {
                 var validationResult = tradeLine.Validate();
 
-                validationResult.LogMessages.ForEach(Console.WriteLine);
+                validationResult.LogMessages.ForEach(_log.Log);
 
                 if(!validationResult.Processed) continue;
                
@@ -35,7 +37,7 @@ namespace TradeProcessor.ConsoleApp
 
             _tradeDatabase.InsertTradeRecords(tradeRecords);
 
-            Console.WriteLine($"INFO: {processedCount} trades processed");
+            _log.Log($"INFO: {processedCount} trades processed");
         }
     }
 }
