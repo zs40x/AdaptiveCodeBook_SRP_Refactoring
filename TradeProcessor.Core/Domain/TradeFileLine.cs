@@ -21,6 +21,11 @@ namespace TradeProcessor.Core.Domain
             var logMessages = new List<string>();
             var columns = LineColumns();
 
+            if (string.IsNullOrEmpty(_fileLine))
+            {
+                return new TradeLineValidationResult(false, new List<string>());
+            }
+
             if (columns.Count < 3)
             {
                 return new TradeLineValidationResult(false, new List<string> { $"WARN: Line {_lineNo} malformed. Only {1} field(s) found." });

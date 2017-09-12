@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="TraceFileLineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TradeProcessorChracterizationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
