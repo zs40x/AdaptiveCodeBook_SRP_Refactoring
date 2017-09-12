@@ -12,7 +12,7 @@ namespace TradeProcessor.ConsoleApp
             var tradeStream = new FileStream("trades.txt",FileMode.Open);
 
             var tradeProcessor = 
-                new TradeProcessor(
+                new BusinessLogic.TradeProcessor(
                     new TradeFilesystem(tradeStream),
                     new SqlServerTradeStore(new SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;")),
                     new ConsoleLog());

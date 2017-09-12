@@ -2,9 +2,9 @@
 using TradeProcessor.Core.Domain;
 using TradeProcessor.Core.Interfaces;
 
-namespace TradeProcessor.ConsoleApp
+namespace TradeProcessor.BusinessLogic
 {
-    internal class TradeProcessor
+    public class TradeProcessor
     {
         private readonly ITradeFilesystem _tradeFile;
         private readonly ITradeStore _tradeStore;
