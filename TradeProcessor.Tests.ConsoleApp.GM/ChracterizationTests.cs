@@ -17,7 +17,7 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         }
 
         [TestMethod]
-        public void EmptyInputFile()
+        public void App_EmptyInputFile()
         {
             _testDataInputFile.WithContent(string.Empty);
 
@@ -29,7 +29,7 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         }
 
         [TestMethod]
-        public void OneFieldOnly()
+        public void App_OneFieldOnly()
         {
             _testDataInputFile.WithContent("Test");
 
@@ -41,21 +41,21 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         }
 
         [TestMethod]
-        public void MalformedCurrencyPair()
+        public void App_MalformedCurrencyPair()
         {
-            _testDataInputFile.WithContent("Test,123,abc");
+            _testDataInputFile.WithContent("GBPUSD,123,test");
       
             _applicationUnderTest.Run();
 
             Assert.AreEqual(
-                "WARN: Trade currencies on line 1 malformed: \'Test\'\r\nINFO: 0 trades processed\r\n",
+                "WARN: Trade price on line 1 not a valid decimal: \'test\'\r\nINFO: 1 trades processed\r\n",
                 _applicationUnderTest.ConsoleOutput);
         }
 
         [TestMethod]
-        public void TradeVolumeInvalid()
+        public void App_TradeVolumeInvalid()
         {
-            _testDataInputFile.WithContent("GBPUSD,xyz,0.1");
+            _testDataInputFile.WithContent("GBPUSD,xyz,abc");
 
             _applicationUnderTest.Run();
 
@@ -65,7 +65,7 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         }
 
         [TestMethod]
-        public void TradeAmountInvalid()
+        public void App_TradeAmountInvalid()
         {
             _testDataInputFile.WithContent("GBPUSD,100,abc");
 
@@ -77,7 +77,7 @@ namespace TradeProcessor.Tests.ConsoleApp.GM
         }
 
         [TestMethod]
-        public void CorrectFormat()
+        public void App_CorrectFormat()
         {
             _testDataInputFile.WithContent("GBPUSD,100,0.81");
 
