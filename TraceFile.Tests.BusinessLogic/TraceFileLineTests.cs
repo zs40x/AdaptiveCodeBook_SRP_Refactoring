@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TradeProcessor.BusinessLogic;
+using TradeProcessor.Core.Domain;
 
 namespace TraceFile.Tests.BusinessLogic
 {

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTradeStore.cs" />
+    <Compile Include="TradeFilesystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TradeProcessor.Core\TradeProcessor.Core.csproj">

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using TradeProcessor.Core;
-using TradeProcessor.Core.Domain;
+﻿using System.Collections.Generic;
+using TradeProcessor.BusinessLogic;
 
-namespace TradeProcessor.BusinessLogic
+namespace TradeProcessor.Core.Domain
 {
     public class TradeFileLine
     {

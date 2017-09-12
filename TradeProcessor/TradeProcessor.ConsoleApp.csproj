@@ -60,7 +60,6 @@
     <Compile Include="ConsoleLog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TradeFile.cs" />
     <Compile Include="TradeProcessor.cs" />
   </ItemGroup>
   <ItemGroup>

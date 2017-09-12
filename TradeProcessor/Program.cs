@@ -13,7 +13,7 @@ namespace TradeProcessor.ConsoleApp
 
             var tradeProcessor = 
                 new TradeProcessor(
-                    new TradeFile(tradeStream),
+                    new TradeFilesystem(tradeStream),
                     new SqlServerTradeStore(new SqlConnection("Data Source=(local);Initial Catalog=Trades;Integrated Security=True;")),
                     new ConsoleLog());
 

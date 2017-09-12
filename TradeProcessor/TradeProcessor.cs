@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TradeProcessor.BusinessLogic;
-using TradeProcessor.Core;
+﻿using System.Collections.Generic;
 using TradeProcessor.Core.Domain;
 using TradeProcessor.Core.Interfaces;
 
@@ -9,11 +6,11 @@ namespace TradeProcessor.ConsoleApp
 {
     internal class TradeProcessor
     {
-        private readonly TradeFile _tradeFile;
+        private readonly ITradeFilesystem _tradeFile;
         private readonly ITradeStore _tradeStore;
         private readonly ILog _log;
 
-        public TradeProcessor(TradeFile tradeFile, ITradeStore tradeStore, ILog log)
+        public TradeProcessor(ITradeFilesystem tradeFile, ITradeStore tradeStore, ILog log)
         {
             _tradeFile = tradeFile;
             _tradeStore = tradeStore;
@@ -23,7 +20,7 @@ namespace TradeProcessor.ConsoleApp
         public void ProcessTrades()
         {
             var processedCount = 0;
-            var tradeLines = _tradeFile.TradeLines() as IList<TradeFileLine> ?? new List<TradeFileLine>();
+            var tradeLines = _tradeFile.FileContent() as IList<TradeFileLine> ?? new List<TradeFileLine>();
             var tradeRecords = new List<TradeRecord>();
 
             foreach (var tradeLine in tradeLines)

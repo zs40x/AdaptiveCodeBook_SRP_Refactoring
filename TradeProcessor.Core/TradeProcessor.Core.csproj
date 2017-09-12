@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\TradeFileLine.cs" />
+    <Compile Include="Domain\TradeLineValidationResult.cs" />
+    <Compile Include="Interfaces\ITradeFilesystem.cs" />
     <Compile Include="Interfaces\ITradeStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\TradeRecord.cs" />

@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using TradeProcessor.BusinessLogic;
+using TradeProcessor.Core.Domain;
+using TradeProcessor.Core.Interfaces;
 
-namespace TradeProcessor.ConsoleApp
+namespace TradeProcessor.Infrasturcure
 {
-    internal class TradeFile: IDisposable
+    public class TradeFilesystem: ITradeFilesystem, IDisposable
     {
         private readonly FileStream _tradeFileStream;
 
-        public TradeFile(FileStream tradeFileStream)
+        public TradeFilesystem(FileStream tradeFileStream)
         {
             _tradeFileStream = tradeFileStream;
         }
 
-        public IEnumerable<TradeFileLine> TradeLines()
+        public IEnumerable<TradeFileLine> FileContent()
         {
-            var lines = new List<TradeFileLine>();
+            var tradeFileLines = new List<TradeFileLine>();
             var lineNo = 1;
 
             using (var reader = new StreamReader(_tradeFileStream))
@@ -24,12 +25,12 @@ namespace TradeProcessor.ConsoleApp
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    lines.Add(new TradeFileLine(lineNo, line));
+                    tradeFileLines.Add(new TradeFileLine(lineNo, line));
                     lineNo++;
                 }
             }
 
-            return lines;
+            return tradeFileLines;
         }
 
         public void Dispose()
