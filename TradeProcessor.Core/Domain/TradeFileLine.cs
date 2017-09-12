@@ -18,6 +18,8 @@ namespace TradeProcessor.Core.Domain
 
         public TradeLineValidationResult Validate()
         {
+            // ToDo: Extract this to the businessLogic project
+
             var logMessages = new List<string>();
             var columns = LineColumns();
 
