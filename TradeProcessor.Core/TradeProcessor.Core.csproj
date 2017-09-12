@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Domain\TradeFileLine.cs" />
     <Compile Include="Domain\TradeLineValidationResult.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\ITradeFilesystem.cs" />
     <Compile Include="Interfaces\ITradeStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
