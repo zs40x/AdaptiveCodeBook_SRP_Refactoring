@@ -17,7 +17,7 @@ namespace TradeProcessor.BusinessLogic
             _tradeFile = tradeFile;
             _tradeStore = tradeStore;
             _log = log;
-            _tradeValidator = new SimpleTradeValidator();
+            _tradeValidator = new SimpleTradeValidator(_log);
         }
 
         public void ProcessTrades()
@@ -28,13 +28,9 @@ namespace TradeProcessor.BusinessLogic
 
             foreach (var tradeLine in tradeLines)
             {
-                var validationResult = _tradeValidator.Validate(tradeLine);
+                if(!_tradeValidator.Validate(tradeLine)) continue;
 
-                validationResult.LogMessages.ForEach(_log.Log);
-
-                if(!validationResult.Processed) continue;
-
-                try
+                try // ToDo: Clean this
                 {
                     tradeRecords.Add(tradeLine.AsTradeRecord());
                 }
