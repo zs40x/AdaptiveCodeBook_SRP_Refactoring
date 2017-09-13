@@ -15,7 +15,7 @@ namespace TradeProcessor.Infrasturcure
             _tradeFileStream = tradeFileStream;
         }
 
-        public IEnumerable<TradeFileLine> FileContent()
+        public List<TradeFileLine> FileContent()
         {
             var tradeFileLines = new List<TradeFileLine>();
             var lineNo = 1;

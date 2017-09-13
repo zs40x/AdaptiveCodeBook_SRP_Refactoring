@@ -5,6 +5,6 @@ namespace TradeProcessor.Core.Interfaces
 {
     public interface ITradeFilesystem
     {
-        IEnumerable<TradeFileLine> FileContent();
+        List<TradeFileLine> FileContent();
     }
 }

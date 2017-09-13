@@ -16,7 +16,7 @@ namespace TraceFile.Tests.BusinessLogic
             _fileLines.Add(line);
         }
 
-        public IEnumerable<TradeFileLine> FileContent()
+        public List<TradeFileLine> FileContent()
         {
             var tradeFileLines = new List<TradeFileLine>();
             var lineNo = 1;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TradeProcessor.Core.Domain;
 using TradeProcessor.Core.Interfaces;
 
@@ -22,30 +23,15 @@ namespace TradeProcessor.BusinessLogic
 
         public void ProcessTrades()
         {
-            var processedCount = 0;
-            var tradeLines = _tradeFile.FileContent() as IList<TradeFileLine>;
-            var tradeRecords = new List<TradeRecord>();
-
-            foreach (var tradeLine in tradeLines)
-            {
-                if(!_tradeValidator.Validate(tradeLine)) continue;
-
-                try // ToDo: Clean this
-                {
-                    tradeRecords.Add(tradeLine.AsTradeRecord());
-                }
-                catch (Exception ex)
-                {
-                    
-                }
-
-
-                processedCount += 1;
-            }
+            var tradeRecords =
+                _tradeFile.FileContent()
+                    .Where(tradeLine => _tradeValidator.Validate(tradeLine))
+                    .Select(tradeLine => tradeLine.AsTradeRecord())
+                    .ToList();
 
             _tradeStore.InsertTradeRecords(tradeRecords);
 
-            _log.Log($"INFO: {processedCount} trades processed");
+            _log.Log($"INFO: {tradeRecords.Count} trades processed");
         }
     }
 }
