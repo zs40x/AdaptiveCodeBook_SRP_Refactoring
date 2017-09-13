@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleTradeProcessor.cs" />
+    <Compile Include="SimpleTradeValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TradeProcessor.Core\TradeProcessor.Core.csproj">

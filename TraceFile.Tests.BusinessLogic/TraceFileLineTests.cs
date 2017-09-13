@@ -11,7 +11,7 @@ namespace TraceFile.Tests.BusinessLogic
         [TestMethod]
         public void InitialLine()
         {
-            var validationResult = MakeTestInstance("test").Validate();
+            var validationResult = Validate("test");
             Assert.IsFalse(validationResult.Processed,"Should not be marked as processed");
             Assert.AreEqual("WARN: Line 1 malformed. Only 1 field(s) found.",validationResult.LogMessages.First());
         }
@@ -19,7 +19,7 @@ namespace TraceFile.Tests.BusinessLogic
         [TestMethod]
         public void InvaildTradeCurrency()
         {
-            var validationResult = MakeTestInstance("abc,100,1").Validate();
+            var validationResult = Validate("abc,100,1");
             Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
             Assert.AreEqual("WARN: Trade currencies on line 1 malformed: 'abc'", validationResult.LogMessages.First());
         }
@@ -27,7 +27,7 @@ namespace TraceFile.Tests.BusinessLogic
         [TestMethod]
         public void TradeAmountNotAValidInteger()
         {
-            var validationResult = MakeTestInstance("GPBUSD,xyz,1").Validate();
+            var validationResult = Validate("GPBUSD,xyz,1");
             Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
             Assert.AreEqual("WARN: Trade amount on line 1 not a valid integer: 'xyz'", validationResult.LogMessages.First());
         }
@@ -35,7 +35,7 @@ namespace TraceFile.Tests.BusinessLogic
         [TestMethod]
         public void TradePriceNotAValidDecimal()
         {
-            var validationResult = MakeTestInstance("GPBUSD,100,mki").Validate();
+            var validationResult = Validate("GPBUSD,100,mki");
             Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
             Assert.AreEqual("WARN: Trade price on line 1 not a valid decimal: 'mki'", validationResult.LogMessages.First());
         }
@@ -43,7 +43,7 @@ namespace TraceFile.Tests.BusinessLogic
         [TestMethod]
         public void TradeAmoundAndPriceInvalid()
         {
-            var validationResult = MakeTestInstance("GBPUSD,afd,zds").Validate();
+            var validationResult = Validate("GBPUSD,afd,zds");
             Assert.IsTrue(validationResult.Processed, "Should be marked as processed");
             Assert.IsTrue(validationResult.LogMessages.Contains("WARN: Trade amount on line 1 not a valid integer: 'afd'"));
             Assert.IsTrue(validationResult.LogMessages.Contains("WARN: Trade price on line 1 not a valid decimal: 'zds'"));
@@ -61,9 +61,9 @@ namespace TraceFile.Tests.BusinessLogic
             Assert.AreEqual(0.2m,tradeRecord.Price);
         }
 
-        private static TradeFileLine MakeTestInstance(string tradeLine)
+        private static TradeLineValidationResult Validate(string tradeLine)
         {
-            return new TradeFileLine(1, tradeLine);
+            return new SimpleTradeValidator().Validate(new TradeFileLine(1, tradeLine));
         }
     }
 }

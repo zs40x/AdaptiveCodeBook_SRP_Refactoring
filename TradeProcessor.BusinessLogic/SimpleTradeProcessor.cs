@@ -10,12 +10,14 @@ namespace TradeProcessor.BusinessLogic
         private readonly ITradeFilesystem _tradeFile;
         private readonly ITradeStore _tradeStore;
         private readonly ILog _log;
+        private readonly SimpleTradeValidator _tradeValidator;
 
         public SimpleTradeProcessor(ITradeFilesystem tradeFile, ITradeStore tradeStore, ILog log)
         {
             _tradeFile = tradeFile;
             _tradeStore = tradeStore;
             _log = log;
+            _tradeValidator = new SimpleTradeValidator();
         }
 
         public void ProcessTrades()
@@ -26,7 +28,7 @@ namespace TradeProcessor.BusinessLogic
 
             foreach (var tradeLine in tradeLines)
             {
-                var validationResult = tradeLine.Validate();
+                var validationResult = _tradeValidator.Validate(tradeLine);
 
                 validationResult.LogMessages.ForEach(_log.Log);
 
